@@ -29,18 +29,20 @@ class UsersTable(Database):
         f_name_key = 'Имя'
         patronymic_key = 'Отчество'
 
-        for row_data in self.data:
+        for row in self.data:
             temp = {}
-            for key, value in row_data.items():
+            for key, value in row.items():
                 if key in keys:
                     temp[key] = value
             self.filtered_data.append(temp)
 
-
-        # for row in self.filtered_data:
-        #     row[l_name_key] = full_name_key.split()[0]
-        #     row[f_name_key] = full_name_key.split()[1]
-        #     row[patronymic_key] = full_name_key.split()[2]
+        for row in self.filtered_data:
+            full_name = row[full_name_key].split()
+            row[l_name_key] = full_name[0]
+            row[f_name_key] = full_name[1]
+            if len(full_name) >= 3:
+                row[patronymic_key] = full_name[2]
+            del(row[full_name_key])
 
         return self.filtered_data
 
