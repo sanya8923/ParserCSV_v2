@@ -53,4 +53,13 @@ class UsersTable(Database):
 
             conn.commit()
 
+    def select_table(self):
+        stmt = select(self.user_table)
 
+        with engine.connect() as conn:
+            result = conn.execute(stmt)
+
+            for row in result:
+                print(row)
+
+            conn.commit()
