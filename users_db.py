@@ -13,12 +13,13 @@ class UsersTable(Database):
                            metadata,
                            Column('id', Integer, primary_key=True),
                            Column('user_id', Integer, ForeignKey('contacts_table.user_id'), nullable=False),
-                           Column('last_name'), String(255),
-                           Column('first_name', String(255)),
-                           Column('patronymic', String(255)),
-                           Column('birthday', String(255)),
-                           Column('gender', String(255)),
-                           Column('pay_method', String(255)))
+                           Column('Фамилия'), String(255),
+                           Column('Имя', String(255)),
+                           Column('Отчество', String(255)),
+                           Column('День рождения', String(255)),
+                           Column('Возраст', String(255)),
+                           Column('Пол', String(255)),
+                           Column('Метод оплаты', String(255)))
 
         metadata.create_all()
 
@@ -46,6 +47,5 @@ class UsersTable(Database):
 
         return self.filtered_data
 
-
-    def entry_table(self):
+    def insert_to_table(self):
         pass

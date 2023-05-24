@@ -11,7 +11,7 @@ class Database(ABC):
         pass
 
     @abstractmethod
-    def entry_table(self):
+    def insert_to_table(self):
         pass
 
     @abstractmethod
