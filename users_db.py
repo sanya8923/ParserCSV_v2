@@ -11,15 +11,14 @@ class UsersTable(Database):
                                 metadata,
                                 Column('id', Integer, primary_key=True),
                                 Column('user_id', Integer, ForeignKey('contacts_table.user_id'), nullable=False),
-                                Column('Фамилия'), String(255),
+                                Column('Фамилия', String(255)),
                                 Column('Имя', String(255)),
                                 Column('Отчество', String(255)),
                                 Column('День рождения', String(255)),
                                 Column('Возраст', String(255)),
                                 Column('Пол', String(255)),
                                 Column('Метод оплаты', String(255)))
-
-    metadata.create_all(engine)
+        metadata.create_all(engine)
 
     def filtering_data(self):
         keys = ['ФИО', 'День рождения', 'Возраст', 'Пол', 'Метод оплаты']
@@ -57,7 +56,8 @@ class UsersTable(Database):
         stmt = select(self.user_table)
 
         with engine.connect() as conn:
-            result = conn.execute(stmt)
+            result_proxy = conn.execute(stmt)
+            result = result_proxy.fetchall()
 
             for row in result:
                 print(row)
