@@ -18,3 +18,7 @@ class Database(ABC):
     @abstractmethod
     def filtering_data(self):
         pass
+
+    @abstractmethod
+    def select_table(self):
+        pass

@@ -1,5 +1,5 @@
 from database import engine, metadata, Database
-from sqlalchemy import Table, Column, Integer, String, ForeignKey
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, insert, select
 
 
 class UsersTable(Database):
@@ -46,4 +46,11 @@ class UsersTable(Database):
         return self.filtered_data
 
     def insert_to_table(self):
-        pass
+        stmt = insert(self.user_table).values(self.filtered_data)
+
+        with engine.connect() as conn:
+            conn.execute(stmt)
+
+            conn.commit()
+
+
