@@ -1,10 +1,10 @@
-from database import metadata
+from database import metadata, Database
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 
 
-class UsersTable:
+class UsersTable(Database):
 
-    def __init__(self, data: list):
+    def __init__(self, data):
         self.data = data
         self.filtered_data = []
 
@@ -24,10 +24,26 @@ class UsersTable:
 
     def filtering_data(self):
         keys = ['ФИО', 'День рождения', 'Возраст', 'Пол', 'Метод оплаты']
+        full_name_key = 'ФИО'
+        l_name_key = 'Фамилия'
+        f_name_key = 'Имя'
+        patronymic_key = 'Отчество'
 
-        for row in self.data:
-            self.filtered_data = {key: value for key, value in row.items() if key in keys}
+        for row_data in self.data:
+            temp = {}
+            for key, value in row_data.items():
+                if key in keys:
+                    temp[key] = value
+            self.filtered_data.append(temp)
+
+
+        # for row in self.filtered_data:
+        #     row[l_name_key] = full_name_key.split()[0]
+        #     row[f_name_key] = full_name_key.split()[1]
+        #     row[patronymic_key] = full_name_key.split()[2]
+
+        return self.filtered_data
+
 
     def entry_table(self):
         pass
-

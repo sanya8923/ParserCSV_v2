@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, MetaData
 from abc import ABC, abstractmethod
 
-engine = create_engine('mysql://root:pajd6284jdk@localhost/db_parser')
+engine = create_engine('mysql+pymysql://root:pajd6284jdk@localhost/db_parser')
 metadata = MetaData()
 
 

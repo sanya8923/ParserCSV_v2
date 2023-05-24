@@ -1,6 +1,7 @@
 from file_downloader import FileDownloader
 from data_analyzer import DataAnalyzer
 from display import Display
+from users_db import UsersTable
 
 
 def main():
@@ -18,6 +19,10 @@ def main():
     display.table_birth_year_count()  # Кто в какой год родился
     display.table_non_unique_phones()  # Повторяющиеся телефоны
     display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некоректные номера
+
+    db = UsersTable(data_analyzed)
+    data_base = db.filtering_data()
+    print(data_base)
 
 
 if __name__ == '__main__':
