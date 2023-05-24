@@ -1,4 +1,4 @@
-from database import metadata, Database
+from database import engine, metadata, Database
 from sqlalchemy import Table, Column, Integer, String, ForeignKey
 
 
@@ -7,21 +7,19 @@ class UsersTable(Database):
     def __init__(self, data):
         self.data = data
         self.filtered_data = []
+        self.user_table = Table('users_table',
+                                metadata,
+                                Column('id', Integer, primary_key=True),
+                                Column('user_id', Integer, ForeignKey('contacts_table.user_id'), nullable=False),
+                                Column('Фамилия'), String(255),
+                                Column('Имя', String(255)),
+                                Column('Отчество', String(255)),
+                                Column('День рождения', String(255)),
+                                Column('Возраст', String(255)),
+                                Column('Пол', String(255)),
+                                Column('Метод оплаты', String(255)))
 
-    def create_table(self):
-        user_table = Table('users_table',
-                           metadata,
-                           Column('id', Integer, primary_key=True),
-                           Column('user_id', Integer, ForeignKey('contacts_table.user_id'), nullable=False),
-                           Column('Фамилия'), String(255),
-                           Column('Имя', String(255)),
-                           Column('Отчество', String(255)),
-                           Column('День рождения', String(255)),
-                           Column('Возраст', String(255)),
-                           Column('Пол', String(255)),
-                           Column('Метод оплаты', String(255)))
-
-        metadata.create_all()
+    metadata.create_all(engine)
 
     def filtering_data(self):
         keys = ['ФИО', 'День рождения', 'Возраст', 'Пол', 'Метод оплаты']
@@ -43,7 +41,7 @@ class UsersTable(Database):
             row[f_name_key] = full_name[1]
             if len(full_name) >= 3:
                 row[patronymic_key] = full_name[2]
-            del(row[full_name_key])
+            del (row[full_name_key])
 
         return self.filtered_data
 
