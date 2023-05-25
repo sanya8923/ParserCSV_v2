@@ -36,10 +36,11 @@ class ContactsTable(Database):
 
             conn.commit()
 
-    def select_table(self):
+    def select_table(self) -> list:
         stmt = select(self.contacts_table)
 
         with engine.connect() as conn:
             result = conn.execute(stmt).fetchall()
             conn.commit()
+        return result
 
