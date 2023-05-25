@@ -2,6 +2,7 @@ from file_downloader import FileDownloader
 from data_analyzer import DataAnalyzer
 from display import Display
 from users_db import UsersTable
+from contacts_db import ContactsTable
 
 
 def main():
@@ -21,7 +22,17 @@ def main():
     # display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некоректные номера
 
     db = UsersTable(data_analyzed)
+    db.insert_to_table()
+    # # db.select_table()
+    #
+    db = ContactsTable(data_analyzed)
+    db.insert_to_table()
     db.select_table()
+
+    # data_users = db.filtering_data()
+    #
+    # for row in data_analyzed:
+    #     print(row)
 
 
 if __name__ == '__main__':

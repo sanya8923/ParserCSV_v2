@@ -112,6 +112,8 @@ class DataAnalyzer:
         age_key = 'Возраст'
         line_number_key = 'Номер строки'
         gender_key = 'Пол'
+        user_id_key = 'user_id'
+        user_id = 1
 
         for line in range(len(lines)):
             new_line = []
@@ -123,7 +125,9 @@ class DataAnalyzer:
             dictionary[age_key] = DataAnalyzer.get_age_by_year(dictionary[date_birth_key])
             dictionary[line_number_key] = line
             dictionary[gender_key] = DataAnalyzer.get_gender(dictionary[fio_key])
+            dictionary[user_id_key] = user_id
             self.processed_data.append(dictionary)
+            user_id += 1
 
         return self.processed_data
 
