@@ -1,5 +1,5 @@
 from database import engine, metadata, Database
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, insert, select, delete
+from sqlalchemy import Table, Column, Integer, String, insert, select
 
 
 class UsersTable(Database):
@@ -59,7 +59,7 @@ class UsersTable(Database):
                         gender=row['Пол'],
                         pay_method=row['Метод оплаты']
                     )
-                conn.execute(stmt)
+                    conn.execute(stmt)
 
             conn.commit()
 

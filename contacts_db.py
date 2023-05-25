@@ -1,5 +1,5 @@
 from database import engine, metadata, Database
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, insert, select, delete
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, insert, select
 
 
 class ContactsTable(Database):

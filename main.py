@@ -3,6 +3,7 @@ from data_analyzer import DataAnalyzer
 from display import Display
 from users_db import UsersTable
 from contacts_db import ContactsTable
+from database_finder import DatabaseFinder
 
 
 def main():
@@ -15,19 +16,21 @@ def main():
     users_with_incorrect_phones = data_analyzer.get_users_with_incorrect_phones()  # Выбираем юзеров с некорректными номерами
     data_analyzer.separation_people_by_pay_method(users_with_incorrect_phones)  # Делим людей по способам оплаты и в зависимости от этого записываем их в соответствующий файл
 
-    # display = Display(data_analyzer)
-    # display.table_lastname_duplicates()  # Однофамильцы
-    # display.table_birth_year_count()  # Кто в какой год родился
-    # display.table_non_unique_phones()  # Повторяющиеся телефоны
-    # display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некорректные номера
+    display = Display(data_analyzer)
+    display.table_lastname_duplicates()  # Однофамильцы
+    display.table_birth_year_count()  # Кто в какой год родился
+    display.table_non_unique_phones()  # Повторяющиеся телефоны
+    display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некорректные номера
 
-    db = UsersTable(data_analyzed)
-    db.insert_to_table()
-    # # db.select_table()
-    #
-    db = ContactsTable(data_analyzed)
-    db.insert_to_table()
-    db.select_table()
+    users_db = UsersTable(data_analyzed)
+    users_db.insert_to_table()
+
+    contacts_db = ContactsTable(data_analyzed)
+    contacts_db.insert_to_table()
+
+    db_finder = DatabaseFinder(users_db, contacts_db)
+    phone = '70001005627'
+    db_finder.find_user_by_phone(phone)
 
     # data_users = db.filtering_data()
     #
