@@ -27,12 +27,12 @@ class ContactsTable(Database):
         return filtered_data
 
     def insert_to_table(self):
-
         with engine.begin() as conn:
             for row in self.filtering_data():
-                stmt = insert(self.contacts_table).values(user_id=row['user_id'],
-                                                          phone=row['Телефон'])
-                conn.execute(stmt)
+                if not self.select_table():
+                    stmt = insert(self.contacts_table).values(user_id=row['user_id'],
+                                                              phone=row['Телефон'])
+                    conn.execute(stmt)
 
             conn.commit()
 
