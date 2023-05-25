@@ -49,15 +49,16 @@ class UsersTable(Database):
     def insert_to_table(self):
         with engine.begin() as conn:
             for row in self.filtering_data():
-                stmt = insert(self.user_table).values(
-                    last_name=row['Фамилия'],
-                    first_name=row['Имя'],
-                    patronymic=row['Отчество'],
-                    birthday=row['День рождения'],
-                    age=row['Возраст'],
-                    gender=row['Пол'],
-                    pay_method=row['Метод оплаты']
-                )
+                if not self.select_table():
+                    stmt = insert(self.user_table).values(
+                        last_name=row['Фамилия'],
+                        first_name=row['Имя'],
+                        patronymic=row['Отчество'],
+                        birthday=row['День рождения'],
+                        age=row['Возраст'],
+                        gender=row['Пол'],
+                        pay_method=row['Метод оплаты']
+                    )
                 conn.execute(stmt)
 
             conn.commit()
