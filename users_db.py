@@ -62,14 +62,10 @@ class UsersTable(Database):
 
             conn.commit()
 
-    def select_table(self):
+    def select_table(self) -> list:
         stmt = select(self.user_table)
 
         with engine.connect() as conn:
-            result_proxy = conn.execute(stmt)
-            result = result_proxy.fetchall()
-
-            for row in result:
-                print(row)
-
+            result = conn.execute(stmt).fetchall()
             conn.commit()
+        return result

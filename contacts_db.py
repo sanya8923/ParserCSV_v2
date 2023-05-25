@@ -40,10 +40,6 @@ class ContactsTable(Database):
         stmt = select(self.contacts_table)
 
         with engine.connect() as conn:
-            result_proxy = conn.execute(stmt)
-            result = result_proxy.fetchall()
-
-            for row in result:
-                print(row)
-
+            result = conn.execute(stmt).fetchall()
             conn.commit()
+

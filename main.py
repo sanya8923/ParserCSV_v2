@@ -19,7 +19,7 @@ def main():
     # display.table_lastname_duplicates()  # Однофамильцы
     # display.table_birth_year_count()  # Кто в какой год родился
     # display.table_non_unique_phones()  # Повторяющиеся телефоны
-    # display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некоректные номера
+    # display.table_users_with_incorrect_phone_numbers(users_with_incorrect_phones)  # Некорректные номера
 
     db = UsersTable(data_analyzed)
     db.insert_to_table()
