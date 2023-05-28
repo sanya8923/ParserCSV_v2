@@ -17,3 +17,14 @@ class Users(Base):
     pay_method: Mapped[str] = mapped_column(String(10))
 
     contacts: Mapped[List['Contacts']] = relationship(back_populates='users', cascade='all, delete-orphan')
+
+    def __repr__(self) -> str:
+        ...
+        return f"User(id={self.id!r}, last_name={self.last_name!r}, " \
+               f"first_name={self.first_name!r}, " \
+               f"patronymic={self.patronymic!r}), " \
+               f"birthday={self.birthday!r}), " \
+               f"age={self.age!r}), " \
+               f"gender={self.gender!r}), " \
+               f"pay_method={self.pay_method!r}),"
+
