@@ -17,3 +17,4 @@ class Contacts(Base):
         ...
         return f"Contacts(id={self.id!r}, phone={self.phone!r})"
 
+
