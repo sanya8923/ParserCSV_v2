@@ -12,3 +12,8 @@ class Contacts(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey('users_table.id'))
 
     user: Mapped['Users'] = relationship(back_populates='contacts')
+
+    def __repr__(self) -> str:
+        ...
+        return f"Contacts(id={self.id!r}, phone={self.phone!r})"
+
