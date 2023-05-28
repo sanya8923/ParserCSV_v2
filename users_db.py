@@ -6,6 +6,7 @@ from typing import List, Optional
 
 class Users(Base):
     __tablename__ = 'users_table'
+
     id: Mapped[int] = mapped_column(primary_key=True)
     last_name: Mapped[str] = mapped_column(String(30))
     first_name: Mapped[str] = mapped_column(String(30))
@@ -15,4 +16,4 @@ class Users(Base):
     gender: Mapped[str] = mapped_column(String(10))
     pay_method: Mapped[str] = mapped_column(String(10))
 
-    contacts: Mapped[List['Contacts']] = relationship(back_populates='users', cascade='all, delete_orphan')
+    contacts: Mapped[List['Contacts']] = relationship(back_populates='users', cascade='all, delete-orphan')
